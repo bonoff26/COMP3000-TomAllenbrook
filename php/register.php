@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="../css/homepage.css">
 <link rel="stylesheet" href="../css/login.css">
 <script src="../javascript/background.js"></script>
+<script src="regPass.js"></script>
 
 <?php
 include_once('navbar.php');
@@ -15,44 +16,49 @@ include_once('../javascript/p5.html');
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card border-0 shadow rounded-3 my-5">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
                 <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
-                    <form>
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
+                    <form action = "process_registration.php" method="post" id="UserRegister">
+
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
+                            <input type="text" class="form-control" id="floatingInputUsername" name="form_usernameReg" placeholder="myusername" required autofocus>
+                            <label for="floatingInputUsername">Username</label>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="email" class="form-control" id="floatingInputEmail" name="form-emailReg" placeholder="name@example.com">
+                            <label for="floatingInputEmail">Email address</label>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" name="form-PasswordReg" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
-                            <label class="form-check-label" for="rememberPasswordCheck">
-                                Remember password
-                            </label>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPasswordConfirm" name="form-PasswordRegConfirm" placeholder="Confirm Password" oninput="checkPass();">
+                            <label for="floatingPasswordConfirm">Confirm Password</label>
                         </div>
-                        <div class="d-grid">
-                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
-                                in</button>
-                        </div>
-                        <hr class="my-4">
+
                         <div class="d-grid mb-2">
-                            <button class="btn btn-google btn-login text-uppercase fw-bold" type="submit">
-                                <i class="fab fa-google me-2"></i> Sign in with Google
-                            </button>
+                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" id="register" type="submit" disabled>Register</button>
                         </div>
-                        <div class="d-grid">
-                            <button class="btn btn-facebook btn-login text-uppercase fw-bold" type="submit">
-                                <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
-                            </button>
-                        </div>
+
+                        <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
+
+                        <hr class="my-4">
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</body>

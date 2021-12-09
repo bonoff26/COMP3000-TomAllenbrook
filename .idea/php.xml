@@ -3,7 +3,14 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/../../../../../xampp/php" />
+      <path value="$PROJECT_DIR$/../../../../../../xampp/php/PEAR" />
+      <path value="$PROJECT_DIR$/../../../../../../xampp/php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="$PROJECT_DIR$/../../../../../../bin/phpunit_2.phar" />
+    </phpunit_settings>
+  </component>
 </project>

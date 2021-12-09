@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class AssertionsTestTest extends TestCase
+class LoginTest extends TestCase
 {
     public function login() {
         $_SESSION[] = "";
@@ -19,10 +19,6 @@ class AssertionsTestTest extends TestCase
 
     }
 
-    public function register() {
 
-    }
-
-    login();
 
 }

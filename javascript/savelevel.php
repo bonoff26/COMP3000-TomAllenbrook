@@ -1,17 +1,13 @@
 <?php
-
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-include_once 'connect.php';
-
-echo("<script>console.log('Trying to save level');</script>");
+session_start();
+$connection = mysqli_connect('localhost', 'root', '', 'project');
 
 $data = file_get_contents("php://input");
+//var_export($data);
 
+$id = $_SESSION['ID'];
 
-saveLevel($_ID, $connection);
+saveLevel($id, $connection, $data);
 
 $url = $_SERVER['HTTP_REFERER'];
 //header("location:main.php");
@@ -19,17 +15,47 @@ $url = $_SERVER['HTTP_REFERER'];
 
 function saveLevel($id, $connection, $data)
 {
-    $inputData = mysqli_real_escape_string($connection, $data);
+    $inputData = json_decode($data);
 
-    $sql = "INSERT INTO `levels` (id, data) VALUES ('$id, $data')";
+    print_r($data);
+    print_r($inputData);
+
+    $spikes = $inputData[0];
+    $platforms = $inputData[1];
+    $goals = $inputData[2];
+    $coins = $inputData[3];
+
+    //$spikeString = implode($spikes);
+
+    $spikeOutput = mysqli_real_escape_string($connection, $spikes);
+    $platformsOutput = mysqli_real_escape_string($connection, $platforms);
+    $goalsOutput = mysqli_real_escape_string($connection, $goals);
+    $coinsOutput = mysqli_real_escape_string($connection, $coins);
+
+    print_r($coinsOutput);
+
+
+    $sql = "INSERT INTO `levels` (id, spikes, platforms, goals, coins) VALUES ('$id', '$spikeOutput', '$platformsOutput', '$goalsOutput', '$coinsOutput')";
+
+
     $result = mysqli_query($connection, $sql);
-    echo("<script>console.log('SAVED SUCCESS' + $id);</script>");
+
+
+
 
     if ($result) {
-        echo "Save successfull! php";
+        print_r("Success");
     } else {
-        echo("<script>console.log('Failed to save at php file');</script>");
-
+        print_r("Failed");
+        print_r(mysqli_error($connection));
+        $sql = "UPDATE `levels` SET spikes='$spikeOutput', platforms='$platformsOutput', goals='$goalsOutput', coins='$coinsOutput' WHERE id=$id";
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+            print_r("Success new entry");
+        }
+        else {
+            print_r("Failed new entry");
+        }
     }
 
 }

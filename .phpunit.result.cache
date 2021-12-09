@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"AssertionsTestTest::testThatStringsMatch":0}}
+{"version":1,"defects":{"AssertionsTestTest::testThatStringsMatch":4,"Warning":6},"times":{"AssertionsTestTest::testThatStringsMatch":0.006,"Warning":0}}

@@ -6,45 +6,45 @@ if(!isset($_SESSION))
 
 require_once 'connect.php';
 
+
 if(isset($_POST['login']))
 {
-  $_SESSION['login'] = checkLogin($_POST['form_username'], $_POST['form-Password'], $connection);
+  echo("<script>console.log('logging in POST');</script>");
+  $_SESSION['login'] = checkLogin($_POST['form_email'], $_POST['form-Password'], $connection);
 }
-$url = $_SERVER['HTTP_REFERER'];
-header("location:$url");
+else {
+  echo("<script>console.log('post not set');</script>");
+}
+//$url = $_SERVER['HTTP_REFERER'];
+header("location:main.php");
 
 
 
-function checkLogin($username, $password, $connection)
+function checkLogin($email, $password, $connection)
 {
   $login = false;
+
   //open the file
-  $sql = "SELECT * FROM `users` WHERE username='$username' AND password='$password'";
+  $sql = "SELECT * FROM `users` WHERE email='$email'";
   $result = mysqli_query($connection, $sql);
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $row = mysqli_fetch_array($result);
+    $hashed_password = $row['password'];
+    if(password_verify($password, $hashed_password)) {
+      $_SESSION['Username'] = $row['username'];
+      $print = $_SESSION['Username'];
 
-    $_SESSION['Username'] = $row['username'];
-    $login = true;
-  }
-  return $login;
-}
 
-//old way to check username/passwords, uses a text file.
-function checkLoginText($username, $password)
-{
-  $login = false;
-  //open the file
-  $file = fopen("../login.txt", "r");
-  $storedUsername = fgets($file);
-  $storedPassword = fgets($file);
-  if((trim($username) == trim($storedUsername)) && (trim($password) == trim($storedPassword)))
-  {
-    $login = true;
-    $_SESSION['Username'] = $username;
+      $_SESSION['ID'] = $row['id'];
+      $login = true;
+      $id =  $_SESSION['ID'];
+    }
+    else {
+      $login = false;
+    }
+
   }
-  fclose($file);
   return $login;
 }
 ?>

@@ -2,14 +2,14 @@
 
 
 function checkPass() {
-  document.getElementById("login").disabled = true;
-  var password1 = document.getElementById('form-PasswordReg').value;
-  var password2 = document.getElementById('form-PasswordRegConfirm').value;
+  document.getElementById("register").disabled = true;
+  var password1 = document.getElementById('floatingPassword').value;
+  var password2 = document.getElementById('floatingPasswordConfirm').value;
 
   if(password1 == password2) {
-    document.getElementById("login").disabled = false;
+    document.getElementById("register").disabled = false;
   }
   else {
-    document.getElementById("login").disabled = true;
+    document.getElementById("register").disabled = true;
   }
 }
